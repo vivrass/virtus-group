@@ -1,8 +1,21 @@
 # Virtus.group
 
 The idea of this gem is to define groups over virtus attributes.
-Which is especially useful when you are working with [form objects](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
-and you don't want to use nasty nested form objects.
+Which is especially useful when you are working with [form objects](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/).
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'virtus-group'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install virtus-group
 
 ## Usage
 
@@ -25,12 +38,9 @@ end
 ```
 
 Don't worry, the `SignUpForm` class will still behave like a regular Virtus class.
-By defining the attributes in groups you get an extra property `attribute_group`.
-
 
 ```ruby
 # ---
-# the attribute_group class method
 
 SignUpForm.attribute_group
 # => {user: [:email, :password], address: [:street, :zipcode, :city]}
@@ -42,17 +52,16 @@ SignUpForm.attribute_group[:address]
 # => [:street, :zipcode, :city]
 
 # ---
-# the attribute_group instance method
 
 sign_up_form = SignUpForm.new({
   email: 'john@example.com', password: '12344321',
   street: 'ABC-Street 1', zipcode: 'Z1234', city: 'ABC'
 })
 
-sign_up_form.attribute_group[:user]
+sign_up_form.attributes_for :user
 # => {email: 'john@example.com', password: '12344321'}
 
-sign_up_form.attribute_group[:address]
+sign_up_form.attributes_for :address
 # => {street: 'ABC-Street 1', zipcode: 'Z1234', city: 'ABC'}
 ```
 
@@ -75,26 +84,14 @@ class SignUpForm
   end
 
   def create
-    user = User.build(attribute_group[:user])
-    user.build_address(attribute_group[:address])
+    user = User.build(attributes_for(:user))
+    user.build_address(attributes_for(:address))
     user.save
   end
 end
 ```
 
-## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'virtus-group'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install virtus-group
 
 ## Contributing
 

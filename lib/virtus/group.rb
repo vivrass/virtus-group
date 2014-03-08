@@ -1,8 +1,9 @@
 require "virtus/group/version"
+require "virtus/group/attribute_tracker"
 
 module Virtus
 
-  # keep virtus api
+  # stick to virtus api
   def self.group
     mod = Module.new
     mod.define_singleton_method :included do |object|
@@ -22,14 +23,21 @@ module Virtus
     module ClassMethods
 
       def group(name, &block)
-        name
+        attribute_tracker = AttributeTracker.new(self, &block)
+        attribute_group[name] = attribute_tracker.tracked_attributes
+      end
+
+      def attribute_group
+        @attribute_group ||= {}
       end
 
     end
 
-    def attribute_group
-
+    def attributes_for(group_name)
+      attributes_in_group = self.class.attribute_group[group_name.to_sym]
+      self.attributes.select{|attribute, _| attributes_in_group.include?(attribute)}
     end
+    alias :with_attributes_for :attributes_for
 
   end
 end
