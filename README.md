@@ -1,4 +1,4 @@
-# Virtus::Group
+# Virtus.group
 
 The idea of this gem is to define groups over virtus attributes.
 Which is especially useful when you are working with [form objects](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
