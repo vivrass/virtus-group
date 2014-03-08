@@ -1,23 +1,21 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'virtus/group/version'
+# encoding: utf-8
+
+require File.expand_path('../lib/virtus/group/version', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = "virtus-group"
   spec.version       = Virtus::Group::VERSION
   spec.authors       = ["Spas Poptchev"]
-  spec.email         = ["sp@converate.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.email         = ["spas.poptchev@me.com"]
+  spec.description   = %q{Define groups over virtus attributes.}
+  spec.summary       = spec.description
+  spec.homepage      = "https://github.com/spoptchev/virtus-group"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = spec.files.grep(%r{^spec/})
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 10.1"
 end
