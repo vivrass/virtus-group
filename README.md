@@ -1,5 +1,7 @@
 # Virtus.group
 
+[![Build Status](https://travis-ci.org/spoptchev/virtus-group.png?branch=master)](https://travis-ci.org/spoptchev/virtus-group)
+
 The idea of this gem is to define groups over Virtus attributes.
 Which is especially useful when you are working with [form objects](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/).
 
