@@ -1,6 +1,6 @@
 # Virtus.group
 
-The idea of this gem is to define groups over virtus attributes.
+The idea of this gem is to define groups over Virtus attributes.
 Which is especially useful when you are working with [form objects](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/).
 
 ## Installation
@@ -37,7 +37,7 @@ class SignUpForm
 end
 ```
 
-Don't worry, the `SignUpForm` class will still behave like a regular Virtus class.
+Don't worry, the `SignUpForm` object will still behave like a regular Virtus object.
 
 ```ruby
 # ---
@@ -65,7 +65,7 @@ sign_up_form.attributes_for :address
 # => {street: 'ABC-Street 1', zipcode: 'Z1234', city: 'ABC'}
 ```
 
-Let's say you have a `create` method on your `SignUpForm` you can use the attribute groups to create your models:
+You can easily build your models from the attribute groups:
 
 ```ruby
 class SignUpForm
@@ -84,7 +84,7 @@ class SignUpForm
   end
 
   def create
-    user = User.build(attributes_for(:user))
+    user = User.new(attributes_for(:user))
     user.build_address(attributes_for(:address))
     user.save
   end
