@@ -104,3 +104,8 @@ end
 5. Create new Pull Request
 
 
+## TODO's
+
+* remove dependency to `active_support` (needed for class level attribute inheritance)
+
+

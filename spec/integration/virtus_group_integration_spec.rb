@@ -54,6 +54,27 @@ describe Virtus::Group do
   end
 
   it_behaves_like 'an object with a virtus group' do
+    let(:base_class) do
+      Class.new do
+        include Virtus.model
+        include Virtus.group
+
+        group :user do
+          attribute :email, String
+        end
+      end
+    end
+
+    let(:model_class) do
+      Class.new(base_class) do
+        group :address do
+          attribute :city, String
+        end
+      end
+    end
+  end
+
+  it_behaves_like 'an object with a virtus group' do
     let(:model_class) do
       Class.new do
         include Virtus.value_object
