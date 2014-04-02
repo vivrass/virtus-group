@@ -1,6 +1,6 @@
-require "active_support/core_ext/class"
 require "virtus/group/version"
 require "virtus/group/attribute_tracker"
+require "virtus/group/attribute_groups"
 
 module Virtus
 
@@ -18,8 +18,6 @@ module Virtus
     def self.included(base)
       base.class_eval do
         extend ClassMethods
-
-        class_attribute :attribute_groups
       end
     end
 
@@ -31,7 +29,16 @@ module Virtus
       end
 
       def attribute_group
-        self.attribute_groups ||= {}
+        self.attribute_groups.for_class(self)
+      end
+
+      def attribute_groups
+        @attribute_groups ||= AttributeGroups.new
+      end
+
+      def inherited(base)
+        super
+        base.attribute_group.merge!(self.attribute_group)
       end
 
     end
