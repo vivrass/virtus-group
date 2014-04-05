@@ -1,5 +1,3 @@
-require 'delegate'
-
 module Virtus
   module Group
 
