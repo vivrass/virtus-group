@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Group do
+describe Virtus::Group, "horizontal inheritance" do
   let!(:base_class) do
     Class.new do
       include Virtus.model

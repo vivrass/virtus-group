@@ -25,7 +25,13 @@ module Virtus
 
       def group(name, &block)
         attribute_tracker = AttributeTracker.new(self, &block)
-        attribute_group[name] = attribute_tracker.tracked_attributes
+
+        if attribute_group.has_key?(name)
+          attribute_group[name] ||= []
+          attribute_group[name] |= attribute_tracker.tracked_attributes
+        else
+          attribute_group[name] = attribute_tracker.tracked_attributes
+        end
       end
 
       def attribute_group
